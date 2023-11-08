@@ -28,7 +28,12 @@ function SignUp() {
             <Input placeholder='Enter your email' type="email" id="email" name="email" />
             <Label htmlFor="username">Your username</Label>
             <Input placeholder='Enter your username' type="text" id="username" name="username" />
+            <Button>Sign Up</Button>
         </Form>   
+        <PageLink>
+            <h3>Already Sign Up?</h3>
+            <a href=''>Go to Sign in</a>
+        </PageLink>  
        </Divv>
     </OuterBox>
   )
@@ -46,7 +51,7 @@ const Divv = styled.div`
     text-align: center;
     background: #FEFEFE;
     border-radius: 10px;
-    padding:0 10px;
+    padding:0 18px;
     .Divv-title {
         font-family: Mulish;
         font-size: 36px;
@@ -57,10 +62,10 @@ const Divv = styled.div`
 
     }
     .Divv-con {
-        display: flex;
+        display: flex;  
         align-items: center;
         justify-content: center; 
-        width: 374px;
+        width: 100%;
         height: 44px;
         padding: 3px 54px;
         border-radius: 4px;
@@ -68,6 +73,8 @@ const Divv = styled.div`
         gap: 16px;
         margin-top:10px; 
         transition :0.6s ;
+        cursor: pointer;
+
         h2 {
         font-family: Mulish;
         font-size: 18px;
@@ -91,7 +98,6 @@ const Divv = styled.div`
     .span-box {
         display: flex;
         align-items: center;
-        margin-top: 16px;
         font-size:14px;
     }
     .span-line {
@@ -99,27 +105,82 @@ const Divv = styled.div`
         height: 1px;
         width: 140px;
         background: #000;
+        margin:26px 0 ;
+
     }
 `
 const Form = styled.form`
-  display: flex;
-  flex-direction: column;
+  margin-top:25px;
   align-items: flex-center;
   justify-content: start;
-  width: 300px;
+  text-align:left;
+  Button:hover {
+        background: transparent;
+        border: 2px solid #6200EE;
+        color:#6200EE ;
+
+    }
+
 `;
 
 const Label = styled.label`
-  font-weight: bold;
+  display: block;
+  font-family: Mulish;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0px;
   margin-bottom: 8px;
-  text-align:left;
 `;
 
 const Input = styled.input`
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 16px;
-`;
+    padding: 8px;
+    border: 1px solid #adabab;
+    background: #e6e5e5;
+    border-radius: 4px;
+    margin-bottom: 29px;
+    width:100%;
+    height: 47px;
+    padding: 14px 16px 14px 16px;
+    border-radius: 6px;
+    border: 1px;
+    gap: 16px;
 
+`;
+const Button = styled.button`
+    width: 374px;
+    height: 50px;
+    padding: 10px 24px 10px 24px;
+    border-radius: 6px;
+    gap: 8px;
+    background: #6200EE;
+    border:3px solid #fff;
+    transition:0.6s;
+    font-size:16px;
+    color: #fff;
+    cursor: pointer;
+   
+`
+const PageLink = styled.div`
+  margin-top:15px;
+ h3 {
+    font-size: 17px;
+    font-weight: 300;
+    text-align: center;
+    display:inline;
+    margin-right:5px;
+ }
+   
+  a {
+    font-size: 17px;
+    font-weight: 300;
+    text-decoration: none;
+    color:#6200EE ;
+    transition: 0.6s;
+  }
+  a:hover {
+    text-decoration:underline ;
+  }
+    
+`
 export default SignUp
