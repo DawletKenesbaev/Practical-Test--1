@@ -17,7 +17,7 @@ function Navbar() {
            <Nav> 
               <div className="left">
                 <div>
-                   <img className="logo" src={Logo} alt="Logo"/>
+                  <a href="/"><img className="logo" src={Logo} alt="Logo"/></a>
                 </div>
                 <SearchInput>
                     <SearchIcon className="svg"/>
@@ -89,6 +89,7 @@ const SearchInput = styled.div`
     padding: 0px 26px;
     border-radius: 6px;
     gap: 12px;
+    transition:0.2s;
    
  &:hover {
   background: #FEFEFE;

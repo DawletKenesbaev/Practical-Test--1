@@ -4,6 +4,8 @@ import { Row, Col } from 'antd';
 
 import React,{ useState } from "react";
 
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
+
 function Header() {
   const [IsModal, setIsModal] = useState(false);
   const HandleCreate = function() {
@@ -107,8 +109,12 @@ function Header() {
              <span>259 pages</span>
             </Card> 
         </Col>  
-      </Row>       
-       </Container>       
+        <Done>
+            <TaskAltIcon className='icon' />
+            <span>Title is created</span>
+        </Done>
+      </Row>     
+      </Container>       
     </Bar>
   )
 }
@@ -325,5 +331,26 @@ const Input = styled.input`
     outline: none;
 
 `;
+//Done
 
+const Done = styled.div`
+  background: #52C41A;
+  position: absolute;
+  right: 40px;
+  bottom: 50px;
+  min-width: 180px;
+  height: 45px;
+  border-radius: 15px;
+  padding: 7px;
+  display: flex;
+  .icon {
+    color: white;
+  }
+  span {
+    font-size:17px;
+    color: white;
+    margin-left:10px;
+  }
+    
+`
 export default Header
