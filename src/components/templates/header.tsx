@@ -14,11 +14,25 @@ function Header() {
   const Fun = function(){
 
   }
+  const [showMessage, setShowMessage] = useState(false);
+
+  const handleShow = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setShowMessage(true);
+    setIsModal(!IsModal)
+
+    
+    setTimeout(() => {
+      setShowMessage(false);
+    }, 3000);
+    e.currentTarget.reset();
+  };
+
   console.log(IsModal);
   return (
     <Bar>
         <div className= { IsModal?'modalClose form'   :'modal form'}>
-        <Form >
+        <Form onSubmit={handleShow}>
         <Label htmlFor="title">Title</Label>
         <Input required placeholder='Enter your title' type="text" id="title" name="title" />
         <Label htmlFor="author">Author</Label>
@@ -30,7 +44,7 @@ function Header() {
         <Label htmlFor="pages"> Pages</Label>
         <Input placeholder='Enter your pages' type="text" id="pages" name="pages" />
         <button className='close' onClick={HandleCreate}>Close</button>
-        <button className='submit' onClick={Fun}>Submit</button>
+        <button className='submit'>Submit</button>
         </Form> 
       </div>
       <Container>  
@@ -108,11 +122,14 @@ function Header() {
              <h3>Dawlet Kenesbaev 2023</h3>
              <span>259 pages</span>
             </Card> 
-        </Col>  
-        <Done>
-            <TaskAltIcon className='icon' />
-            <span>Title is created</span>
-        </Done>
+        </Col> 
+        {
+            showMessage ? (<Done>
+                <TaskAltIcon className='icon' />
+                <span>Book is created</span>
+            </Done>): <></>
+        } 
+        
       </Row>     
       </Container>       
     </Bar>
