@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Googleicon from '../../assets/images/social-logos.svg';
 import Facebookicon from '../../assets/images/Facebook.png'
 
-function SignUp() {
+function SignIn() {
   return (
     <OuterBox>
        <Divv>
@@ -28,11 +28,13 @@ function SignUp() {
             <Input placeholder='Enter your email' type="email" id="email" name="email" />
             <Label htmlFor="username">Your username</Label>
             <Input placeholder='Enter your username' type="text" id="username" name="username" />
-            <Button>Sign Up</Button>
+            <Label htmlFor="password">Your password</Label>
+            <Input placeholder='Enter your password' type="password" id="password" name="password" />
+            <Button>Sign In</Button>
         </Form>   
         <PageLink>
-            <h3>Already Sign Up?</h3>
-            <a href='#'>Go to Sign in</a>
+            <h3>Already Signed Up?</h3>
+            <a href='#'>Go to Sign up</a>
         </PageLink>  
        </Divv>
     </OuterBox>
@@ -183,4 +185,4 @@ const PageLink = styled.div`
   }
     
 `
-export default SignUp
+export default SignIn;
