@@ -9,9 +9,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Logo from '../../assets/images/logo.png'
 
 
+
 function Navbar() {
+  
   return (
-    <div className="navbar">
         <Container>
            <Nav> 
               <div className="left">
@@ -30,9 +31,10 @@ function Navbar() {
               </div>
            </Nav>
         </Container>
-    </div>
   )
 }
+
+
 const Container = styled.div`
   margin:0 auto;
   padding: 0 20px;
@@ -49,6 +51,14 @@ const Nav = styled.div`
         left: 0;
         position: absolute;
         display:flex;
+        .svg {
+            cursor:pointer;
+
+        }
+        .cancel {
+            cursor:pointer;
+
+        }
     }
     .logo {
     }
@@ -61,6 +71,8 @@ const Nav = styled.div`
             width: 29px;
             height:29px;
             margin:0 5px;
+            cursor:pointer;
+
         }
 
     }
