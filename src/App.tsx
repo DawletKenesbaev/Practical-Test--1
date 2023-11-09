@@ -11,13 +11,8 @@ function App() {
 const Divv = styled.div`
   background: grey;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 `
-export const Container = styled.div`
-  margin:0 auto;
-  background: #b3b1b1;
-  padding: 0 20px;
-  max-width: 1240px;
-`
+
 
 export default App

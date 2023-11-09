@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Googleicon from '../../assets/images/social-logos.svg';
 import Facebookicon from '../../assets/images/Facebook.png'
 
+
 function SignIn() {
   return (
     <OuterBox>
@@ -45,11 +46,11 @@ const OuterBox = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
 `
 const Divv = styled.div`
     width: 430px;
-    height: 695px;
+    min-height: 695px;
     text-align: center;
     background: #FEFEFE;
     border-radius: 10px;
