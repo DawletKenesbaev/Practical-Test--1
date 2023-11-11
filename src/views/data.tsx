@@ -55,20 +55,33 @@ import axios from 'axios';
 import * as CryptoJS from 'crypto-js';
 
 // Replace these values with your actual Key and Sign
-const userKey: string = "dawletkenesbaev";
-const sign: string = "08712d03fc6d1f60a83fe95732706165";
+const userKey: string = "20042004";
+//const sign: string = "08712d03fc6d1f60a83fe95732706165";
+//const sign: string = "b453eddf717cdcbb414b03549f7f130b";
+
+
+//once worked const sign: string = "c06810df5ceb6a73288643ee4efc1c8f";
+
+const sign: string = "c06810df5ceb6a73288643ee4efc1c8f";
+
+
+
 
 // Replace this URL with your actual endpoint
-const url: string = "http://example.com/books";
-
+// once worked const url: string = " https://0001.uz/books";
+const url: string = "http://localhost:3006/books";
 // Replace this with your request body if needed
 const requestBody = {"isbn": "9781118464465"};
 
 // Construct the string to sign
-const stringToSign: string = `POST/books${JSON.stringify(requestBody)}dawletisbest`;
+const stringToSign: string = `POST/books${JSON.stringify(requestBody)}generalhux`;
+
+console.log("String to Sign:", stringToSign);
 
 // Calculate the MD5 hash using crypto-js
 const calculatedSign: string = CryptoJS.MD5(stringToSign).toString();
+
+console.log("Calculated Sign:", calculatedSign);
 
 // Check if the calculated sign matches the provided sign
 if (calculatedSign !== sign) {
