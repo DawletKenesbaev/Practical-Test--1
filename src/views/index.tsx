@@ -3,14 +3,12 @@ import SignUp from './auth/signup'
 import SignIn from './auth/signin'
 import Navbar from '../components/templates/navbar';
 import Header from '../components/templates/header';
-import Data from './data';
-
+import BookList from '../components/templates/bookList';
 function Views() {
   return (
     <div>
-      {/* <Navbar />
-      <Header /> */}
-      <Data />
+       <Navbar />
+      <Header /> 
     </div>
   )
 }

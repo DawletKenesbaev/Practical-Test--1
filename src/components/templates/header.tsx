@@ -5,7 +5,7 @@ import { Row, Col } from 'antd';
 import React,{ useState } from "react";
 
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
-
+import BookList from './bookList';
 function Header() {
   const [IsModal, setIsModal] = useState(false);
   const HandleCreate = function() {
@@ -58,79 +58,7 @@ function Header() {
               <button onClick={HandleCreate}>+ Create a book</button>
            </div>
        </Top>
-      <Row>
-        <Col  sm={24} md={12} lg={8} xl={8}>
-           <Card>
-             <h2>Title PI fdfdsfds</h2>
-             <p>Lorem ipsum dolor sit amet consectetur 
-                adipisicing elit. Alias aliquam modi q
-                uidem ut totam? Tempore ipsa officiis
-                 eaque voluptate at.</p>
-             <h3>Dawlet Kenesbaev 2023</h3>
-             <span>259 pages</span>
-            </Card> 
-        </Col>
-        <Col  sm={24} md={12} lg={8} xl={8}>
-           <Card>
-             <h2>Title PI fdfdsfds</h2>
-             <p>Lorem ipsum dolor sit amet consectetur 
-                adipisicing elit. Alias aliquam modi q
-                uidem ut totam? Tempore ipsa officiis
-                 eaque voluptate at.</p>
-             <h3>Dawlet Kenesbaev 2023</h3>
-             <span>259 pages</span>
-            </Card> 
-        </Col><Col  sm={24} md={12} lg={8} xl={8}>
-           <Card>
-             <h2>Title PI fdfdsfds</h2>
-             <p>Lorem ipsum dolor sit amet consectetur 
-                adipisicing elit. Alias aliquam modi q
-                uidem ut totam? Tempore ipsa officiis
-                 eaque voluptate at.</p>
-             <h3>Dawlet Kenesbaev 2023</h3>
-             <span>259 pages</span>
-            </Card> 
-        </Col><Col  sm={24} md={12} lg={8} xl={8}>
-           <Card>
-             <h2>Title PI fdfdsfds</h2>
-             <p>Lorem ipsum dolor sit amet consectetur 
-                adipisicing elit. Alias aliquam modi q
-                uidem ut totam? Tempore ipsa officiis
-                 eaque voluptate at.</p>
-             <h3>Dawlet Kenesbaev 2023</h3>
-             <span>259 pages</span>
-            </Card> 
-        </Col>
-        <Col  sm={24} md={12} lg={8} xl={8}>
-           <Card>
-             <h2>Title PI fdfdsfds</h2>
-             <p>Lorem ipsum dolor sit amet consectetur 
-                adipisicing elit. Alias aliquam modi q
-                uidem ut totam? Tempore ipsa officiis
-                 eaque voluptate at.</p>
-             <h3>Dawlet Kenesbaev 2023</h3>
-             <span>259 pages</span>
-            </Card> 
-        </Col>
-        <Col  sm={24} md={12} lg={8} xl={8}>
-           <Card>
-             <h2>Title PI fdfdsfds</h2>
-             <p>Lorem ipsum dolor sit amet consectetur 
-                adipisicing elit. Alias aliquam modi q
-                uidem ut totam? Tempore ipsa officiis
-                 eaque voluptate at.</p>
-             <h3>Dawlet Kenesbaev 2023</h3>
-             <span>259 pages</span>
-            </Card> 
-        </Col> 
-        {
-            showMessage ? (<Done>
-                <TaskAltIcon className='icon' />
-                <span>Book is created</span>
-            </Done>): <></>
-        } 
-        
-      </Row>     
+      <BookList />    
       </Container>       
     </Bar>
   )

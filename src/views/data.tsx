@@ -1,136 +1,87 @@
 // import axios from 'axios';
 // import * as CryptoJS from 'crypto-js';
 
-// // const userKey = "20042004";
-// const userKey = "kenesbaevdawlet";
-// // const sign = "c06810df5ceb6a73288643ee4efc1c8f";
-// const sign = "4a56f05a79b7e94d5e1a3e6b5c1da600";
 
-// const url = "https://0001.uz/books";
-// const requestBody = {"isbn": "9781118464465"};
+// import React from 'react'
 
-// const stringToSign = `POST/books${JSON.stringify(requestBody)}falcon-16`;
-// const calculatedSign = CryptoJS.MD5(stringToSign).toString();
+// function Data() {
+//     const userKey: string = "20042004";
+// const url: string = "https://0001.uz/books";
+// const requestBody = { "isbn": "9781118464460" };
 
-// console.log("String to Sign:", stringToSign);
-// console.log("Calculated Sign:", calculatedSign);
+// // Calculate the 'Sign' value
+// const stringToSign: string = `POST/books${JSON.stringify(requestBody)}generalhux`;
+// const sign: string = CryptoJS.MD5(stringToSign).toString();
 
-// if (calculatedSign !== sign) {
-//     console.log("Sign verification failed.");
-// } else {
-//     const headers = {
-//         "Key": userKey,
-//         "Sign": sign
-//     };
-
+// // Set up headers
+// const headers = {
+//     "Key": userKey,
+//     "Sign": sign
+// };
 //     axios.post(url, requestBody, { headers })
-//         .then(response => {
-//             console.log("Response:", response.data);
-//         })
-//         .catch(error => {
-//             console.error("Error:", error.message);
-//         });
-// }
+//     .then(response => {
+//         console.log(response.data);
+//     })
+//     .catch(error => {
+//         if (error.response) {
+//             const responseData = error.response.data;
 
-// function Data() {
+//             // Check if the error is due to a duplicate ISBN
+//             if (responseData.message === "Book with this ISBN already exists") {
+//                 console.error("Error: Book with this ISBN already exists");
+//             } else {
+//                 // Handle other types of errors
+//                 console.error("Error response data:", responseData);
+//             }
+//         } else if (error.request) {
+//             // The request was made but no response was received
+//             console.error("No response received:", error.request);
+//         } else {
+//             // Something happened in setting up the request that triggered an Error
+//             console.error("Request setup error:", error.message);
+//         }
+//     });
 //   return (
-//     <div></div>
-//   )
-// }
-
-// export default Data;
-
-
-// import { useState } from "react";
-// import React from "react";
-// function Data() {
-//   const [data,setData] = useState([])
-// //b453eddf717cdcbb414b03549f7f130b
-
-//   const getHeaders = () => {
-//     const key = "20042004"; // Replace with your actual key
-//     const secret = "generalhux"; // Replace with your actual secret
-  
-//     const signString = GET/books${JSON.stringify({ key, secret })};
-//     const sign = CryptoJS.MD5(signString).toString();
-  
-//     return {
-//       Key: key,
-//       Sign: sign,
-//     };
-//   };
-  
-  
- 
-//   const fetchBooks = async () => {
-//     try {
-//       const url = "https://0001.uz/books";
-//       const headers = getHeaders();
-  
-//       const response = await fetch(url, {
-//         method: "GET",
-//         headers: headers,
-//       });
-  
-//       if (!response.ok) {
-//         throw new Error(HTTP error! Status: ${response.status});
-//       }
-  
-//       const data = await response.json();
-//       console.log("Data:", data); // Log the data
-//       setData(data);
-//       return data;
-//     } catch (error) {
-//       console.error("Error fetching books:", error);
-//       throw error;
-//     }
-//   };
-  
-//   return (
-//     <div>ddddddd
+//     <div>
+//       njjjjj
 //     </div>
 //   )
 // }
 
 // export default Data
-import axios from 'axios';
-import * as CryptoJS from 'crypto-js';
-const userKey: string = "20042004";
-const sign: string = "c06810df5ceb6a73288643ee4efc1c8f";
-const url: string = " https://0001.uz/books";
-const requestBody = {"isbn": "9781118464465"};
-const stringToSign: string = `POST/books${JSON.stringify(requestBody)}generalhux`;
 
-console.log("String to Sign:", stringToSign);
+// import React, { useEffect,useState } from 'react';
 
-const calculatedSign: string = CryptoJS.MD5(stringToSign).toString();
+// function Data() {
+//     const [books,setBooks] = useState([])
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       const url = 'https://book-finder1.p.rapidapi.com/api/search?series=Wings%20of%20fire&book_type=Fiction&lexile_min=600&lexile_max=800&results_per_page=25&page=1';
+//       const options = {
+//         method: 'GET',
+//         headers: {
+//           'X-RapidAPI-Key': '5b1939ce94mshb49f52bb7690bbbp191ef1jsn509ca8e8e8cc',
+//           'X-RapidAPI-Host': 'book-finder1.p.rapidapi.com'
+//         }
+//       };   
+//       try {
+//         const response = await fetch(url, options);
+//         const result : any = await response.text();
+//         console.log(result);
+//         setBooks(result);
+//       } catch (error) {
+//         console.error(error);
+//       }
+//     };
 
-console.log("Calculated Sign:", calculatedSign);
+//     fetchData();
+//   }, []); 
 
-if (calculatedSign !== sign) {
-    console.log("Sign verification failed.");
-} else {
-    const headers = {
-        "Key": userKey,
-        "Sign": sign
-    };
+//   return (
+//     <div>
+//       {/* Your component JSX */}
+//     </div>
+//   );
+// }
 
-    axios.post(url, requestBody, { headers })
-        .then(response => {
-            console.log(response.data);
-        })
-        .catch(error => {
-            console.error(error.message);
-        });
-}
-
-function Data() {
-
-  return (
-    <div>
-      Finally getting some data
-    </div>
-  )
-}
-
-export default Data
+// export default Data;
