@@ -16,3 +16,19 @@ function Views() {
 }
 
 export default Views
+
+
+
+
+
+// {
+//   "data": {
+//       "email": "hux@gmail.com",
+//       "id": 8,
+//       "key": "kenesbaevdawlet",
+//       "name": "Hux",
+//       "secret": "falcon-16"
+//   },
+//   "isOk": true,
+//   "message": "ok"
+// }
