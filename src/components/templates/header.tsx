@@ -3,14 +3,22 @@ import styled from 'styled-components';
 import React,{ useState } from "react";
 
 //import TaskAltIcon from '@mui/icons-material/TaskAlt';
+interface Book {
+  title: string;
+  author_last_names: string;
+  copyright: string;
+  page_count?: string;
+  price?: string;
+  cover: string;
+
+}
 function Header() {
   const [IsModal, setIsModal] = useState(false);
   const HandleCreate = function() {
     setIsModal(!IsModal)
   }
   const [showMessage, setShowMessage] = useState(false);
-  const handleShow = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleShow = () => {
     setShowMessage(true);
     setIsModal(!IsModal)
 
@@ -18,26 +26,68 @@ function Header() {
     setTimeout(() => {
       setShowMessage(false);
     }, 3000);
-    e.currentTarget.reset();
   };
+ 
 
-  console.log(IsModal);
+  const [books, setBooks] = useState<Book[]>([]);
+  const [title, setTitle] = useState('');
+  const [author_last_names, setAuthorLastName] = useState('');
+  const [copyright, setCopyright] = useState('');
+  const [page_count, setDate] = useState('');
+  const [cover, setCover] = useState('');
+  function HandleCreateBook(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    console.log('submitted');
+    
+    const newBook:Book = {
+      title,
+      author_last_names,
+      copyright,
+      page_count,
+      cover,
+    };
+    const storedData = localStorage.getItem('myLocalData');
+      
+    if (storedData) {
+      const data = JSON.parse(storedData);
+      setBooks(data.results);
+      console.log(data.results);
+    } else {
+      console.error('Data not found in localStorage');
+    }
+    setBooks([...books, newBook]);
+
+    // Update local storage
+      localStorage.setItem(
+        'myLocalData',
+        JSON.stringify({
+          total_results: books.length + 1,
+          total_pages: Math.ceil((books.length + 1/ PAGE_SIZE)),
+          results: [...books, newBook],
+        })
+      );
+    e.currentTarget.reset();
+
+    // Update the state or perform any other actions with the new book data
+  };
+  
   return (
     <Bar>
         <div className= { IsModal?'modalClose form'   :'modal form'}>
-        <Form onSubmit={handleShow}>
+        <Form onSubmit={HandleCreateBook}>
         <Label htmlFor="title">Title</Label>
-        <Input required placeholder='Enter your title' type="text" id="title" name="title" />
+        <Input onChange={(e)=>{ setTitle(e.target.value)}}  placeholder='Enter your title' type="text" id="title" name="title" />
         <Label htmlFor="author">Author</Label>
-        <Input placeholder='Enter your author' type="text" id="author" name="author" />
+        <Input onChange={(e)=>{ setAuthorLastName(e.target.value)}}  placeholder='Enter your author' type="text" id="author" name="author" />
         <Label htmlFor="cover"> Cover</Label>
-        <Input placeholder='Enter your cover' type="text" id="cover" name="cover" />
+        <Input onChange={(e)=>{ setCover(e.target.value)}}  placeholder='Enter your cover' type="text" id="cover" name="cover" />
         <Label htmlFor="date">Published year    </Label>
-        <Input placeholder='Enter your published date' type="text" id="date" name="date" />
+        <Input onChange={(e)=>{ setCopyright(e.target.value)}}  placeholder='Enter your published date' type="text" id="date" name="date" />
         <Label htmlFor="pages"> Pages</Label>
-        <Input placeholder='Enter your pages' type="text" id="pages" name="pages" />
+        <Input onChange={(e)=>{ setDate(e.target.value)}}  placeholder='Enter your pages' type="text" id="pages" name="pages" />
         <button className='close' onClick={HandleCreate}>Close</button>
-        <button className='submit'>Submit</button>
+        <button className='submit' type='submit' onClick={handleShow} >Submit</button>
         </Form> 
       </div>
       <Container>  

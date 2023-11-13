@@ -132,95 +132,15 @@ export default BookList;
     "total_pages": 3,
     "results": [
       {
-        "subcategories": [
-          "Fantasy - General",
-          "Action & Adventure"
-        ],
-        "english_language_learner": false,
-        "vocab_words": [
-          "tense",
-          "odd",
-          "smolder",
-          "alternate",
-          "convenient",
-          "compact",
-          "former",
-          "addax",
-          "expose",
-          "peril"
-        ],
         "page_count": 308,
-        "title_search": "Brightest Night",
-        "author_first_names": [
-          "Tui T."
-        ],
-        "max_age": 10,
-        "canonical_published_work_id": 302710,
         "copyright": 2014,
         "title": "The Brightest Night",
-        "measurements": {
-          "english": {
-            "mlf": 3.47601135339001,
-            "syntactic_demand_percentile": null,
-            "semantic_demand_percentile": null,
-            "lexile_code": "",
-            "decoding_demand_percentile": null,
-            "measurable": true,
-            "msl": 11.3765561843169,
-            "lexile": 790,
-            "structure_demand_percentile": null
-          }
-        },
-        "subject_tags": [
-          "Adventure stories (Children's / Teenage)",
-          "General fiction (Children's / Teenage)",
-          "Fantasy & magical realism (Children's / Teenage)"
-        ],
-        "chapter_measurements": [],
-        "recommended_isbns": [
-          "9781496583499",
-          "9781484778715",
-          "9781496565549",
-          "9780525646686"
-        ],
-        "published_works": [
-          {
-            "isbn": "9780545349222",
-            "english_language_learner": false,
-            "copyright": 2014,
-            "published_work_id": 302710,
-            "page_count": 308,
-            "binding": "HC",
-            "cover_art_url": "https://s3.amazonaws.com/mm-static-media/books/cover-art/9780545349222.jpeg"
-          },
-          {
-            "isbn": "9780545634038",
-            "english_language_learner": false,
-            "copyright": 2014,
-            "published_work_id": 828536,
-            "page_count": 336,
-            "binding": "EB",
-            "cover_art_url": "https://s3.amazonaws.com/mm-static-media/books/cover-art/9780545634038.jpeg"
-          }
-        ],
         "author_last_names": [
           "Sutherland"
         ],
-        "series_name": "Wings of Fire",
-        "min_age": 8,
-        "book_type": "Trade Fiction",
-        "awards": [],
-        "authors": [
-          "Tui T. Sutherland"
-        ],
-        "categories": [
-          "Fiction, Non-fiction & Poetry",
-          "Science Fiction & Fantasy"
-        ],
         "language": "english",
         "summary": "The dragonets struggle to fulfill the prophecy and -- somehow -- end the war in this thrilling new installment of the New York Times bestselling Wings of Fire series!One will have the power of wings of fire . . . Sunny has always taken the Dragonet Prophecy very seriously. If Pyrrhia's dragons need her, Clay, Tsunami, Glory, and Starflight to end the war, she's ready to try. She even has some good ideas how to do it, if anyone would listen to her.But shattering news from Morrowseer has shaken Sunny's faith in their destiny. Is it possible for anyone to end this terrible war and choose a new SandWing queen? What if everything they've been through was for nothing? Buried secrets, deadly surprises, and an unexpected side to scavengers are all waiting for her in the shifting sands of the desert, where Sunny must decide once and for all: Is her destiny already written?Or can five dragonets change their fate and save the world . . . the way they choose?",
-        "work_id": 315588,
-        "canonical_isbn": "9780545349222"
+        
       },
       {
         "subcategories": [
