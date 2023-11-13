@@ -1,14 +1,17 @@
-import React from 'react'
+import React, {useState} from 'react'
 import SignUp from './auth/signup'
 import SignIn from './auth/signin'
 import Navbar from '../components/templates/navbar';
 import Header from '../components/templates/header';
 import BookList from '../components/templates/bookList';
+
 function Views() {
+  const [searchTerm, setSearchTerm] = useState<string>('');
   return (
     <div>
-       <Navbar />
-      <Header /> 
+       <Navbar  setSearchTerm={setSearchTerm} />
+       <Header /> 
+       <BookList  searchTerm={searchTerm}/>
     </div>
   )
 }

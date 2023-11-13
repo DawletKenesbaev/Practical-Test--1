@@ -7,11 +7,17 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import Logo from '../../assets/images/logo.png'
+import { useState ,ChangeEvent } from "react";
+
+interface NavbarProps {
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+}
 
 
-
-function Navbar() {
-  
+function Navbar({ setSearchTerm }: NavbarProps) {
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
   return (
         <Container>
            <Nav> 
@@ -21,7 +27,7 @@ function Navbar() {
                 </div>
                 <SearchInput>
                     <SearchIcon className="svg"/>
-                    <input placeholder="Search for any training you want" />
+                    <input onChange={handleSearchChange}  placeholder="Search for any training you want" />
                     <CancelIcon className="cancel" />  
                 </SearchInput>
               </div>
