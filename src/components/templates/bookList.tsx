@@ -10,6 +10,8 @@ interface Book {
   copyright: number;
   page_count?: number;
   price?: string;
+  summary: string;
+
 }
 
 interface BookCardProps {
@@ -21,10 +23,7 @@ function BookCard({ book }: BookCardProps) {
       <Col  sm={24} md={12} lg={8} xl={8}>
          <Card>
            <h2>{book.title}</h2>
-           <p>Lorem ipsum dolor sit amet consectetur 
-              adipisicing elit. Alias aliquam modi q
-              uidem ut totam? Tempore ipsa officiis
-               eaque voluptate at.</p>
+           <p>{book.summary ? book.summary.split(/\s+/).slice(0, 50).join(' ') :"     Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate natus laboriosam, eveniet,    Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate natus laboriosam, eveniet, accusantium quod vitae voluptate cum corrupti beatae deleniti quam nobis nisi!"}</p>
            <h3>{book.author_last_names}   {book.copyright}</h3>
            <span>{book.page_count} pages</span>
           </Card> 
@@ -35,16 +34,19 @@ function BookCard({ book }: BookCardProps) {
 
   function BookList() {
     const [books, setBooks] = useState<Book[]>([]);
-  
+    const [searchTerm, setSearchTerm] = useState<string>('');
+
     useEffect(() => {
       const fetchData = async () => {
         const url = 'https://book-finder1.p.rapidapi.com/api/search?series=Wings%20of%20fire&book_type=Fiction&lexile_min=600&lexile_max=800&results_per_page=10&page=1';
         const options = {
           method: 'GET',
           headers: {
-            'X-RapidAPI-Key': 'b8b9b9a0a8msh04a1f382cba8d9fp1e54eejsn44237dc189f9',
+            'X-RapidAPI-Key': '5b1939ce94mshb49f52bb7690bbbp191ef1jsn509ca8e8e8cc',
             'X-RapidAPI-Host': 'book-finder1.p.rapidapi.com'
           }
+        //reserve API KEY: '',
+
         };
   
         try {
@@ -60,17 +62,20 @@ function BookCard({ book }: BookCardProps) {
       const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
   
       const fetchWithDelay = async () => {
-        await delay(500);
+        await delay(6500);
         fetchData();
       };
   
       fetchWithDelay();
     }, []);
-  
+    const filteredBooks = searchTerm
+    ? books.filter((book) =>
+        book.title.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : books;
     return (
       <Row>
-        <h2>Book List</h2>
-        {books && books.length > 0 ? (
+        {filteredBooks && filteredBooks.length > 0 ? (
           books.map((book, index) => <BookCard key={index} book={book} />)
         ) : (
           <p>No books available</p>
