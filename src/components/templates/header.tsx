@@ -56,14 +56,14 @@ function Header() {
     } else {
       console.error('Data not found in localStorage');
     }
-    setBooks([...books, newBook]);
+    setBooks((prevBooks) => [...prevBooks, newBook]);
 
     // Update local storage
       localStorage.setItem(
         'myLocalData',
         JSON.stringify({
           total_results: books.length + 1,
-          total_pages: Math.ceil((books.length + 1/ PAGE_SIZE)),
+          total_pages: Math.ceil((books.length + 1)),
           results: [...books, newBook],
         })
       );
