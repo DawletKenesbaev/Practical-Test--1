@@ -9,9 +9,11 @@ function Views() {
   const [searchTerm, setSearchTerm] = useState<string>('');
   return (
     <div>
-       <Navbar  setSearchTerm={setSearchTerm} />
+       {/* <Navbar  setSearchTerm={setSearchTerm} />
        <Header /> 
-       <BookList  searchTerm={searchTerm}/>
+       <BookList  searchTerm={searchTerm}/> */}
+       <SignIn />
+       <SignUp />
     </div>
   )
 }

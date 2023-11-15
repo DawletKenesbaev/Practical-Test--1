@@ -28,7 +28,7 @@ function SignUp() {
             <Input placeholder='Enter your email' type="email" id="email" name="email" />
             <Label htmlFor="username">Your username</Label>
             <Input placeholder='Enter your username' type="text" id="username" name="username" />
-            <Button>Sign Up</Button>
+            <Button type='submit'>Sign Up</Button>
         </Form>   
         <PageLink>
             <h3>Already Sign Up?</h3>

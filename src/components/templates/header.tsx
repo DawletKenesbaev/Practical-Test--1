@@ -37,9 +37,7 @@ function Header() {
   const [cover, setCover] = useState('');
   function HandleCreateBook(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
     console.log('submitted');
-    
     const newBook:Book = {
       title,
       author_last_names,
@@ -55,6 +53,7 @@ function Header() {
       console.log(data.results);
     } else {
       console.error('Data not found in localStorage');
+      
     }
     setBooks((prevBooks) => [...prevBooks, newBook]);
 
@@ -62,14 +61,12 @@ function Header() {
       localStorage.setItem(
         'myLocalData',
         JSON.stringify({
-          total_results: books.length + 1,
-          total_pages: Math.ceil((books.length + 1)),
-          results: [...books, newBook],
+          total_results: data.total_results + 1,
+          total_pages: Math.ceil((data.total_results + 1)),
+          results: [...data.results, newBook],
         })
       );
     e.currentTarget.reset();
-
-    // Update the state or perform any other actions with the new book data
   };
   
   return (
@@ -97,7 +94,6 @@ function Header() {
                <h3>Your task today</h3>
            </div>
            <div className='right'>
-              <input placeholder='enter your name'/>
               <button onClick={HandleCreate}>+ Create a book</button>
            </div>
        </Top>
@@ -174,48 +170,7 @@ const Top = styled.div`
         }
     }
 `
-const Card = styled.div`
-    max-width: 390.33px;
-    min-height: 209px;
-    padding: 32px;
-    border-radius: 12px;
-    border: 1px;
-    gap: 16px;
-    background: #d6a5a5;
-    margin:30px;
-    font-family: Montserrat;
 
-    h2 {
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 20px;
-        letter-spacing: 0px;
-        text-align: left;
-    }
-    p {
-        font-family: Mulish;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 21px;
-        letter-spacing: 0px;
-        text-align: left;
-        margin:20px 0;
-    }
-    h3 {
-        display: inline-block;
-        font-size: 15px;
-        font-weight: 400;
-        line-height: 21px;
-    }
-    span {
-        display: inline-block;
-        margin-left: 10px;
-        padding:3px 7px;
-        border-radius:9px;
-        background: green;
-        margin-right:auto;
-    }
-`
 //Bar
 const Bar = styled.div`
   position: relative;
