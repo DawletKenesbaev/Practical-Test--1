@@ -35,6 +35,8 @@ function BookCard({ book }: BookCardProps) {
   
 
   function BookList({ searchTerm }: BookListProps) {
+    console.log(searchTerm);
+    
     const [books, setBooks] = useState<Book[]>([]);
   
     useEffect(() => {
