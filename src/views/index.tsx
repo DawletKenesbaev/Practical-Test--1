@@ -1,4 +1,6 @@
-import React, {useState} from 'react'
+import {useState  } from 'react'
+
+import {BrowserRouter as Router,Routes,Route } from 'react-router-dom'
 import SignUp from './auth/signup'
 import SignIn from './auth/signin'
 import Navbar from '../components/templates/navbar';
@@ -9,11 +11,16 @@ function Views() {
   const [searchTerm, setSearchTerm] = useState<string>('');
   return (
     <div>
-       {/* <Navbar  setSearchTerm={setSearchTerm} />
-       <Header /> 
-       <BookList  searchTerm={searchTerm}/> */}
-       <SignIn />
-       <SignUp />
+      <Router>
+        <Routes>
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={ <SignIn />} />
+          <Route path="/" element={<Navbar setSearchTerm={setSearchTerm} />} />
+          <Route path="/signup" element={<Header />} />
+          <Route path="/signup" element={<BookList searchTerm={searchTerm} />} />
+        </Routes>
+      </Router>
+     
     </div>
   )
 }
@@ -23,7 +30,11 @@ export default Views
 
 
 
-
+{/* <Navbar   />
+<Header /> 
+<BookList  />
+<SignIn />
+<SignUp /> */}
 // {
 //   "data": {
 //       "email": "hux@gmail.com",

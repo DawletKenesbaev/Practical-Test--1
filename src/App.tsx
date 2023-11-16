@@ -1,7 +1,6 @@
 import './App.css'
 import Views from './views'
 import styled from 'styled-components'
-
 function App() {
   return (
    <Divv>
@@ -15,5 +14,5 @@ const Divv = styled.div`
   min-height: 100vh;
 `
 
-
+//https://youtu.be/6SINAXYhgXE
 export default App

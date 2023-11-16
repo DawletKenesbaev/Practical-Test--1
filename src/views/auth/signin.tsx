@@ -47,6 +47,7 @@ const OuterBox = styled.div`
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+
 `
 const Divv = styled.div`
     width: 430px;
