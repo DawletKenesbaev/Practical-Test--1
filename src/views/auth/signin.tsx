@@ -1,14 +1,37 @@
-import React from 'react'
+import React,{useState,} from 'react'
 import styled from 'styled-components'
 import Googleicon from '../../assets/images/social-logos.svg';
 import Facebookicon from '../../assets/images/Facebook.png'
+import firebase from '../../firebase.tsx';
+import { useNavigate ,Link} from 'react-router-dom';
+import { UserAuth } from '../../contexts/AuthContext.jsx';
 
+const SignIn: React.FC = ()=> {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-function SignIn() {
+  const { signIn } = UserAuth();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError('')
+    try {
+      await signIn(email, password)
+      navigate('/views')
+
+    } catch (e) {
+      if (e instanceof Error) {
+        setError(e.message);
+        console.log(e.message);
+      } 
+    }
+  };
+
   return (
     <OuterBox>
        <Divv>
-         <h1 className='Divv-title'>Sign Up</h1>
+         <h1 className='Divv-title'>Sign In</h1>
          <button className='Divv-con'>
             <img className='Divv-img' src={Googleicon} alt='google'/>
             <h2>Continue with Google</h2>
@@ -22,20 +45,18 @@ function SignIn() {
             <span className='span'>OR</span>
             <span className='span-line'></span>
         </div>
-        <Form>
-            <Label htmlFor="name">Your name</Label>
-            <Input placeholder='Dawlet King' type="text" id="name" name="name" />
-            <Label htmlFor="email">Your email</Label>
-            <Input placeholder='Enter your email' type="email" id="email" name="email" />
-            <Label htmlFor="username">Your username</Label>
-            <Input placeholder='Enter your username' type="text" id="username" name="username" />
-            <Label htmlFor="password">Your password</Label>
-            <Input placeholder='Enter your password' type="password" id="password" name="password" />
+        <Form onSubmit={handleSubmit} >
+            <Label htmlFor="email"  >Your email</Label>
+            <Input placeholder='Enter your email' onChange={(e) => setEmail(e.target.value)} type="email" id="email" name="email" />
+            <Label htmlFor="password" >Your password</Label>
+            <Input placeholder='Enter your password' onChange={(e) => setPassword(e.target.value)} type="password" id="password" name="password" />
             <Button>Sign In</Button>
         </Form>   
         <PageLink>
             <h3>Already Signed Up?</h3>
-            <a href='#'>Go to Sign up</a>
+            <Link to='/signup' className='underline'>
+              Go to Sign up
+            </Link>
         </PageLink>  
        </Divv>
     </OuterBox>
@@ -47,6 +68,7 @@ const OuterBox = styled.div`
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+
 `
 const Divv = styled.div`
     width: 430px;

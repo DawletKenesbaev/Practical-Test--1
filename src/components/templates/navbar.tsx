@@ -7,7 +7,8 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import Logo from '../../assets/images/logo.png'
-import { useState ,ChangeEvent } from "react";
+import { ChangeEvent } from "react";
+import { Link, useNavigate } from 'react-router-dom';
 
 interface NavbarProps {
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
@@ -18,6 +19,12 @@ function Navbar({ setSearchTerm }: NavbarProps) {
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
+  const navigate = useNavigate();
+
+  const handleIconClick = () => {
+    navigate('/account');
+  };
+
   return (
         <Container>
            <Nav> 
@@ -33,7 +40,7 @@ function Navbar({ setSearchTerm }: NavbarProps) {
               </div>
               <div className="right">
                 <NotificationsNoneIcon className="icon" />
-                <AccountCircleIcon className="icon"  />
+                <Link to='/account' onClick={handleIconClick}><AccountCircleIcon className="icon"  /></Link>
               </div>
            </Nav>
         </Container>

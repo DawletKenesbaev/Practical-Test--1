@@ -1,9 +1,32 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
 import Googleicon from '../../assets/images/social-logos.svg';
 import Facebookicon from '../../assets/images/Facebook.png'
+import { useNavigate } from 'react-router-dom';
 
+
+import { UserAuth } from '../../contexts/AuthContext.jsx';
 function SignUp() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('')
+  const navigate = useNavigate();
+  
+  const { createUser } = UserAuth();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError('');
+    try {
+      await createUser(email, password);
+      navigate('/views')
+
+    } catch (e) {
+      if (e instanceof Error) {
+        setError(e.message);
+        console.log(e.message);
+      } 
+    }
+  };
   return (
     <OuterBox>
        <Divv>
@@ -21,18 +44,21 @@ function SignUp() {
             <span className='span'>OR</span>
             <span className='span-line'></span>
         </div>
-        <Form>
-            <Label htmlFor="name">Your name</Label>
-            <Input placeholder='Dawlet King' type="text" id="name" name="name" />
+        <Form onSubmit={handleSubmit}>
+            {/* <Label htmlFor="name">Your name</Label>
+            <Input placeholder='Dawlet King' type="text" id="name" name="name" /> */}
             <Label htmlFor="email">Your email</Label>
-            <Input placeholder='Enter your email' type="email" id="email" name="email" />
-            <Label htmlFor="username">Your username</Label>
-            <Input placeholder='Enter your username' type="text" id="username" name="username" />
+            <Input onChange={(e) => setEmail(e.target.value)} placeholder='Enter your email' type="email" id="email" name="email" />
+            {/* <Label htmlFor="username">Your username</Label>
+            <Input placeholder='Enter your username' type="text" id="username" name="username" /> */}
+            <Label htmlFor="password" >Your password</Label>
+            <Input placeholder='Enter your password' onChange={(e) => setPassword(e.target.value)} type="password" id="password" name="password" />
             <Button type='submit'>Sign Up</Button>
         </Form>   
         <PageLink>
             <h3>Already Sign Up?</h3>
             <a href='#'>Go to Sign in</a>
+            
         </PageLink>  
        </Divv>
     </OuterBox>
