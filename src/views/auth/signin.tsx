@@ -18,7 +18,7 @@ const SignIn: React.FC = ()=> {
     setError('')
     try {
       await signIn(email, password)
-      navigate('/views')
+      navigate('/')
 
     } catch (e) {
       if (e instanceof Error) {

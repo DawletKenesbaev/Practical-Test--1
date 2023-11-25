@@ -18,7 +18,7 @@ function SignUp() {
     setError('');
     try {
       await createUser(email, password);
-      navigate('/views')
+      navigate('/')
 
     } catch (e) {
       if (e instanceof Error) {
