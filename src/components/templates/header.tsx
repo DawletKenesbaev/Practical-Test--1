@@ -37,35 +37,6 @@ function Header() {
   const [cover, setCover] = useState('');
   function HandleCreateBook(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log('submitted');
-    const newBook:Book = {
-      title,
-      author_last_names,
-      copyright,
-      page_count,
-      cover,
-    };
-    const storedData = localStorage.getItem('myLocalData');
-      
-    if (storedData) {
-      const data = JSON.parse(storedData);
-      setBooks(data.results);
-      console.log(data.results);
-    } else {
-      console.error('Data not found in localStorage');
-      
-    }
-    setBooks((prevBooks) => [...prevBooks, newBook]);
-
-    // Update local storage
-      localStorage.setItem(
-        'myLocalData',
-        JSON.stringify({
-          total_results: data.total_results + 1,
-          total_pages: Math.ceil((data.total_results + 1)),
-          results: [...data.results, newBook],
-        })
-      );
     e.currentTarget.reset();
   };
   
