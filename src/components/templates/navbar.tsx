@@ -29,7 +29,7 @@ function Navbar({ setSearchTerm }: NavbarProps) {
         <Container>
            <Nav> 
               <div className="left">
-                <div>
+                <div className="logoBox">
                   <a href="/"><img className="logo" src={Logo} alt="Logo"/></a>
                 </div>
                 <SearchInput>
@@ -58,6 +58,12 @@ const Nav = styled.div`
     align-items: center;
     position: relative;
     padding: 30px 10px;
+   
+    @media (max-width: 600px) {
+      .logoBox {
+        display:none;
+      }
+    }
     .left {
         height: 48px;
         gap: 24px;
@@ -104,6 +110,9 @@ const SearchInput = styled.div`
     gap: 12px;
     transition:0.2s;
    
+    @media (max-width: 698px) {
+      width:300px;
+    }  
  &:hover {
   background: #FEFEFE;
   .svg {
@@ -120,6 +129,7 @@ const SearchInput = styled.div`
     background: transparent;
     color: black;
    font-size:18px;
+ 
    ::placeholder {
       color: #888;
     }

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import SignIn from './views/auth/signin';
 import SignUp from './views/auth/signup';
 import Account from './views/auth/account';
-import { Route, Routes } from 'react-router-dom'; // Corrected import
+import { Route, Routes } from 'react-router-dom';
 import { AuthContextProvider } from './contexts/AuthContext.jsx';
 import ProtectedRoute from './views/auth/protected';
 import Views from './views';
@@ -36,7 +36,6 @@ function App() {
 }
 
 export default App;
-
 const Divv = styled.div`
   background: grey;
   width: 100vw;

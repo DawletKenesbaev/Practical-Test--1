@@ -5,14 +5,19 @@ import React,{ useState } from "react";
 //import TaskAltIcon from '@mui/icons-material/TaskAlt';
 interface Book {
   title: string;
-  author_last_names: string;
-  copyright: string;
-  page_count?: string;
-  price?: string;
-  cover: string;
+  author: string;
+  publishedYear: string;
+  pages: string;
+  summary: string;
 
 }
-function Header() {
+
+interface HeaderProps {
+  setFetch: React.Dispatch<React.SetStateAction<boolean>>;
+  fetch: boolean;
+}
+
+function Header(props:HeaderProps) {
   const [IsModal, setIsModal] = useState(false);
   const HandleCreate = function() {
     setIsModal(!IsModal)
@@ -27,19 +32,46 @@ function Header() {
       setShowMessage(false);
     }, 3000);
   };
- 
 
-  const [books, setBooks] = useState<Book[]>([]);
+
   const [title, setTitle] = useState('');
-  const [author_last_names, setAuthorLastName] = useState('');
-  const [copyright, setCopyright] = useState('');
-  const [page_count, setDate] = useState('');
-  const [cover, setCover] = useState('');
-  function HandleCreateBook(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    e.currentTarget.reset();
-  };
+  const [author, setAuthor] = useState('');
+  const [publishedYear, setPublishedYear] = useState('');
+  const [pages, setPages] = useState('');
+  const [summary, setSummary] = useState('');
+    function HandleCreateBook(e: React.FormEvent<HTMLFormElement>) {
+      handleShow();
+      console.log('submitted');
+      props.setFetch(!props.fetch)
+      e.preventDefault();
+        const newBook: Book = {
+        title,
+        author,
+        publishedYear,
+        pages,
+        summary,
+      };  
+    //   const existingDataString = localStorage.getItem('Data');
+    // const existingData: Book[] = existingDataString ? JSON.parse(existingDataString) : [];
+    //  console.log(existingData);
+     
+     
+    //   const updatedData = [...existingData, newBook];
+    //   localStorage.setItem('Data', JSON.stringify(updatedData));
+    //   console.log(updatedData);
+
   
+    // Reset the form fields
+    // setTitle('');
+    // setAuthorLastName('');
+    // setCopyright('');
+    // setDate('');
+    // setCover('');
+    
+    // Optionally, close the modal or show a success message
+    e.currentTarget.reset();
+    
+  }
   return (
     <Bar>
         <div className= { IsModal?'modalClose form'   :'modal form'}>
@@ -47,15 +79,15 @@ function Header() {
         <Label htmlFor="title">Title</Label>
         <Input onChange={(e)=>{ setTitle(e.target.value)}}  placeholder='Enter your title' type="text" id="title" name="title" />
         <Label htmlFor="author">Author</Label>
-        <Input onChange={(e)=>{ setAuthorLastName(e.target.value)}}  placeholder='Enter your author' type="text" id="author" name="author" />
-        <Label htmlFor="cover"> Cover</Label>
-        <Input onChange={(e)=>{ setCover(e.target.value)}}  placeholder='Enter your cover' type="text" id="cover" name="cover" />
+        <Input onChange={(e)=>{ setAuthor(e.target.value)}}  placeholder='Enter your author' type="text" id="author" name="author" />
+        <Label htmlFor="cover"> Summary</Label>
+        <Input onChange={(e)=>{ setSummary(e.target.value)}}  placeholder='Enter your cover' type="text" id="cover" name="cover" />
         <Label htmlFor="date">Published year    </Label>
-        <Input onChange={(e)=>{ setCopyright(e.target.value)}}  placeholder='Enter your published date' type="text" id="date" name="date" />
+        <Input onChange={(e)=>{ setPublishedYear(e.target.value)}}  placeholder='Enter your published date' type="text" id="date" name="date" />
         <Label htmlFor="pages"> Pages</Label>
-        <Input onChange={(e)=>{ setDate(e.target.value)}}  placeholder='Enter your pages' type="text" id="pages" name="pages" />
+        <Input onChange={(e)=>{ setPages(e.target.value)}}  placeholder='Enter your pages' type="text" id="pages" name="pages" />
         <button className='close' onClick={HandleCreate}>Close</button>
-        <button className='submit' type='submit' onClick={handleShow} >Submit</button>
+        <button className='submit' type='submit'  >Submit</button>
         </Form> 
       </div>
       <Container>  
@@ -266,4 +298,46 @@ const Done = styled.div`
   }
     
 `
+
 export default Header
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//be confident
