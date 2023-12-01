@@ -9,7 +9,7 @@ function Views() {
   const [fetch,setFetch] = useState<boolean>(true)
   return (
     <div>
-      <Navbar setSearchTerm={setSearchTerm} />
+      <Navbar setSearchTerm={setSearchTerm} searchTerm = {searchTerm}/>
       <Header setFetch={setFetch} fetch={fetch}/>
       {/* <CreateBook /> */}
       <BookList searchTerm={searchTerm} fetch={fetch}/>

@@ -51,24 +51,7 @@ function Header(props:HeaderProps) {
         pages,
         summary,
       };  
-    //   const existingDataString = localStorage.getItem('Data');
-    // const existingData: Book[] = existingDataString ? JSON.parse(existingDataString) : [];
-    //  console.log(existingData);
      
-     
-    //   const updatedData = [...existingData, newBook];
-    //   localStorage.setItem('Data', JSON.stringify(updatedData));
-    //   console.log(updatedData);
-
-  
-    // Reset the form fields
-    // setTitle('');
-    // setAuthorLastName('');
-    // setCopyright('');
-    // setDate('');
-    // setCover('');
-    
-    // Optionally, close the modal or show a success message
     e.currentTarget.reset();
     
   }

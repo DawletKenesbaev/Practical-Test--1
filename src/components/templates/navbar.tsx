@@ -9,18 +9,24 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Logo from '../../assets/images/logo.png'
 import { ChangeEvent } from "react";
 import { Link, useNavigate } from 'react-router-dom';
+import Search from "@mui/icons-material/Search";
 
 interface NavbarProps {
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  searchTerm : string
 }
 
 
-function Navbar({ setSearchTerm }: NavbarProps) {
+function Navbar({ setSearchTerm ,searchTerm}: NavbarProps) {
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
   const navigate = useNavigate();
-
+  const handleCancel = () => {
+    setSearchTerm('')
+    console.log('clicked');
+    
+  }
   const handleIconClick = () => {
     navigate('/account');
   };
@@ -34,8 +40,8 @@ function Navbar({ setSearchTerm }: NavbarProps) {
                 </div>
                 <SearchInput>
                     <SearchIcon className="svg"/>
-                    <input onChange={handleSearchChange}  placeholder="Search for any training you want" />
-                    <CancelIcon className="cancel" />  
+                    <input onChange={handleSearchChange} value= {searchTerm} placeholder="Search for any training you want" />
+                    <CancelIcon onClick={handleCancel} className="cancel" />  
                 </SearchInput>
               </div>
               <div className="right">

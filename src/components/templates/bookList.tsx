@@ -38,93 +38,80 @@ function BookCard({ book }: BookCardProps) {
   function BookList({ searchTerm }: BookListProps) {    
     const [books, setBooks] = useState<Book[]>([]);
     const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
-//     useEffect(() => {
-//       async function fetchAllBooks() {
-//         const url =`${URL}/books/all`;
-//         //   {
-// //     "name":     "Dawlett",
-// //     "email":    "dawlett@gmail.com",
-// //     "key":      "Pet",
-// //     "secret":   "Cat"
-// // }
-//         try {
-//           const response = await fetch(url, {
-//             method: "GET",
-//             headers: {
-//               Key: 'Pet',
-//               Sign: '6c6e7255963bc90f1823b3260559ae64'
-//             },
-//           });
-//           if (!response.ok) {
-//             throw new Error(`Request failed with status: ${response.status}`);
-//           }
-//           const data = await response.json();
-//           setBooks(data.data)
-//         } catch (error) {
-//           console.error("Error fetching all books:", error);
-//         }
-//       }
-//       fetchAllBooks();
-//     },[]); 
-    
- 
-  
-    function generateSign(method: string, url: string, body: any, secret: string): string {
-      const pathWithQuery = url.split('?')[0]; // Remove query parameters for the sign calculation
-      const signStr = `${method}${pathWithQuery}${JSON.stringify(body)}${secret}`;
-      const sign = CryptoJS.MD5(signStr).toString();
-      return sign;
-    }
-
-    // Example usage:
-    const method = 'GET';
-    const url = '/books/'; // Replace with your actual URL
-    const body = { key: 'Pet', secret: 'Cat' }; // Replace with your actual body
-    const userSecret = 'Cat'; // Replace with your actual user secret
-
-    const generatedSign = generateSign(method, url, body, userSecret);
-    console.log('Generated Sign:', generatedSign);
-     useEffect(() => {
-    async function SearchData() {
-      const url = `${URL}/books/${searchTerm}`;
-      try {
-        const response = await fetch(url, {
-          method: "GET",
-          headers: {
-            Key: 'Pett',
-            Sign: generatedSign,
-          },
-        });
-    
-        if (!response.ok) {
-          throw new Error(`Request failed with status: ${response.status}`);
+    useEffect(() => {
+      async function fetchAllBooks() {
+        const url =`${URL}/books/all`;
+        try {
+          const response = await fetch(url, {
+            method: "GET",
+            headers: {
+              Key: 'Pet',
+              Sign: '6c6e7255963bc90f1823b3260559ae64'
+            },
+          });
+          if (!response.ok) {
+            throw new Error(`Request failed with status: ${response.status}`);
+          }
+          const data = await response.json();
+          setBooks(data.data)
+        } catch (error) {
+          console.error("Error fetching all books:", error);
         }
-    
-        // Check if the response body is empty
-        const text = await response.text();
-        if (!text.trim()) {
-          console.warn('Response body is empty');
-          return; // exit the function if the response is empty
-        }
-    
-        const data = JSON.parse(text);
-        console.log("Searched books:", data);
-        setFilteredBooks(data.data);
-      } catch (error) {
-        console.error("Error fetching books:", error);
       }
-    }
-      SearchData();
+      fetchAllBooks();
+    },[]); 
+    useEffect(() => {
+      async function searchBooks() {
+        if (searchTerm.trim() === '') {
+          return;
+        }
+        const method = 'GET';
+        const apiUrl = `/books/${searchTerm}`;
+        const userSecret = 'Catt';
+        const requestBody = { "isbn": "9781118464465" };
+        const sign = CryptoJS.MD5(`${method.toUpperCase()}${apiUrl}${userSecret}`).toString();
+        console.log(sign);
+        const url = `${URL}/books/${searchTerm}`;
+        try { 
+          const response = await fetch(url, {
+            method:'GET',
+            headers: {
+              Key: 'Pett',
+              Sign: sign,
+            },
+          });
+  
+          if (!response.ok) {
+            throw new Error(`Request failed with status: ${response.status}`);
+          }
+  
+          const data = await response.json();
+          console.log('Searched books:', data);
+          setFilteredBooks(data.data);
+        } catch (error) {
+          console.error('Error fetching books:', error);
+        }
+      }
+  
+      searchBooks();
     }, [searchTerm]);
+  
     return (
       <Row>
-        {/* {books.length > 0 ? (
-          books.map((book, index) => (
+        {
+          searchTerm?
+          filteredBooks.map((book, index) => (
             <BookCard key={index} book={book} />
+          )):(books.length > 0 ? (
+            books.map((book, index) => (
+              <BookCard key={index} book={book} />
+            ))
+          ) : (
+            <p>Loading</p>
           ))
-        ) : (
-          <p>Loading</p>
-        )} */}
+
+        }
+      
         {/* {
           filteredBooks.map((book, index) => (
             <BookCard key={index} book={book} />
