@@ -1,56 +1,35 @@
-import { useState } from 'react';
 import CryptoJS from 'crypto-js';
-const CreateBook = () => {
-//   const [newBook, setNewBook] = useState({
-//     isbn: '9780000000000', // Replace with the actual ISBN of the new book
-//     title: 'New Book Title', // Replace with the actual title of the new book
-//     // Add other properties of the new book as needed
-//   });
- 
-  
-function generateSign(method: string, url: string, body: string, secret: string): string {
-    const signString = `${method}${url}${body}${secret}`;
-    const sign = CryptoJS.MD5(signString).toString();
-    return sign;
+
+interface Book {
+  isbn: string;
+  // other book properties...
 }
 
+interface RequestOptions {
+  method: string;
+  url: string;
+  book: Book;
+  userSecret: string;
+}
+
+function generateSign({ method, url, book, userSecret }: RequestOptions): string {
+  const requestBody = JSON.stringify({ isbn: book.isbn });
+  const sign = CryptoJS.MD5(`${method.toUpperCase()}+${url}+${requestBody}+${userSecret}`).toString();
+  return sign;
+}
+
+// Example usage:
 const method = 'POST';
-const url = '/books';
-const body = '{"isbn":"9781118464465"}';
-const userSecret = 'Dawlet';
-const generatedSign = generateSign(method, url, body, userSecret);
-console.log(generatedSign);
-const createNewBook = async () => {
-    const URL = 'https://0001.uz/books';
-    try {
-      const response = await fetch(URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Key: 'MyName',
-          Sign: generatedSign,
-        },
-        body: body,
-      });
+const apiUrl = '/books';
+const userKey = 'MyUserKey';
+const userSecret = 'MyUserSecret';
 
-      if (!response.ok) {
-        throw new Error(`Request failed with status: ${response.status}`);
-      }
+// Creating the first book
+const book1: Book = { isbn: '9781118464463' };
+const sign1 = generateSign({ method, url: apiUrl, book: book1, userSecret });
+console.log('Sign for book1:', sign1);
 
-      const data = await response.json();
-      console.log('New book created:', data);
-
-      // Optionally, you can update your component state or take other actions
-    } catch (error) {
-      console.error('Error creating new book:', error);
-    }
-  };
-  return (
-    <div>
-      <h1>Create a New Book</h1>
-      <button onClick={createNewBook}>Create Book</button>
-    </div>
-  );
-};
-
-export default CreateBook;
+// Creating another book with a different isbn
+const book2: Book = { isbn: '9781118464465' };
+const sign2 = generateSign({ method, url: apiUrl, book: book2, userSecret });
+console.log('Sign for book2:', sign2);

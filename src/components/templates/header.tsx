@@ -1,15 +1,15 @@
+
 import styled from 'styled-components';
+import React, { useState } from "react";
+import CryptoJS from 'crypto-js';
 
-import React,{ useState } from "react";
-
-//import TaskAltIcon from '@mui/icons-material/TaskAlt';
 interface Book {
   title: string;
   author: string;
-  publishedYear: string;
+  published: string;
   pages: string;
   summary: string;
-
+  cover: string;
 }
 
 interface HeaderProps {
@@ -17,61 +17,107 @@ interface HeaderProps {
   fetch: boolean;
 }
 
-function Header(props:HeaderProps) {
-  const [IsModal, setIsModal] = useState(false);
-  const HandleCreate = function() {
-    setIsModal(!IsModal)
-  }
+const initialValues = {
+  title: '',
+  author: '',
+  published: '',
+  pages: '',
+  summary: '',
+  cover: '',
+};
+
+function Header(props: HeaderProps) {
+  const [isModal, setIsModal] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
+  const [formData, setFormData] = useState<Book>(initialValues);
+
+  const handleToggleModal = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsModal(!isModal);
+  };
+  
   const handleShow = () => {
     setShowMessage(true);
-    setIsModal(!IsModal)
+    setIsModal(!isModal);
 
-    
     setTimeout(() => {
       setShowMessage(false);
     }, 3000);
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  
+    try {
+      await handleCreateBook(e); 
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+  const handleCreateBook = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleShow();
+    props.setFetch(!props.fetch);
+    const requestData = {
+      isbn: "9781118464490",
+      ...formData, 
+    };
+    try {
+      const method = 'POST';
+      const apiUrl = "https://0001.uz/books";
+      const userSecret = 'Catt';
+      const requestBody = { "isbn": "9781118464465" };
+      const sign = CryptoJS.MD5(`${method}${apiUrl}${userSecret}`).toString();
+      console.log(sign);
+      const response = await fetch("https://0001.uz/books", {
+        method: "POST",
+        headers: {
+          Key: "Pett", 
+          Sign: 'f7d7273905545235092e03f801833fc3', 
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Request failed with status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      console.log("New book created:", data);
+    } catch (error) {
+      console.error("Error creating new book:", error);
+    }
+    console.log('New book data:', formData);
+    setFormData(initialValues);
+  };
 
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
-  const [publishedYear, setPublishedYear] = useState('');
-  const [pages, setPages] = useState('');
-  const [summary, setSummary] = useState('');
-    function HandleCreateBook(e: React.FormEvent<HTMLFormElement>) {
-      handleShow();
-      console.log('submitted');
-      props.setFetch(!props.fetch)
-      e.preventDefault();
-        const newBook: Book = {
-        title,
-        author,
-        publishedYear,
-        pages,
-        summary,
-      };  
-     
-    e.currentTarget.reset();
-    
-  }
   return (
     <Bar>
-        <div className= { IsModal?'modalClose form'   :'modal form'}>
-        <Form onSubmit={HandleCreateBook}>
-        <Label htmlFor="title">Title</Label>
-        <Input onChange={(e)=>{ setTitle(e.target.value)}}  placeholder='Enter your title' type="text" id="title" name="title" />
-        <Label htmlFor="author">Author</Label>
-        <Input onChange={(e)=>{ setAuthor(e.target.value)}}  placeholder='Enter your author' type="text" id="author" name="author" />
+      <div className={isModal ? 'modalClose form' : 'modal form'}>
+        <Form onSubmit={handleCreateBook}>
+          {/* Your form input fields */}
+          <Label htmlFor="title">Title</Label>
+          <Input onChange={handleChange} value={formData.title} placeholder="Enter your title" type="text" id="title" name="title" />
+
+          <Label htmlFor="author">Author</Label>
+        <Input onChange={handleChange} value={formData.author}  placeholder='Enter your author' type="text" id="author" name="author" />
         <Label htmlFor="cover"> Summary</Label>
-        <Input onChange={(e)=>{ setSummary(e.target.value)}}  placeholder='Enter your cover' type="text" id="cover" name="cover" />
+        <Input onChange={handleChange} value={formData.cover}  placeholder='Enter your cover' type="text" id="cover" name="cover" />
         <Label htmlFor="date">Published year    </Label>
-        <Input onChange={(e)=>{ setPublishedYear(e.target.value)}}  placeholder='Enter your published date' type="text" id="date" name="date" />
+        <Input onChange={handleChange} value={formData.published}  placeholder='Enter your published date' type="text" id="date" name="date" />
         <Label htmlFor="pages"> Pages</Label>
-        <Input onChange={(e)=>{ setPages(e.target.value)}}  placeholder='Enter your pages' type="text" id="pages" name="pages" />
-        <button className='close' onClick={HandleCreate}>Close</button>
-        <button className='submit' type='submit'  >Submit</button>
-        </Form> 
+        <Input onChange={handleChange} value={formData.pages}  placeholder='Enter your pages' type="text" id="pages" name="pages" />
+          <button className="close" onClick={handleToggleModal}>
+            Close
+          </button>
+          <button className="submit" type="submit">
+            Submit
+          </button>
+        </Form>
       </div>
       <Container>  
         <Top>
@@ -80,13 +126,14 @@ function Header(props:HeaderProps) {
                <h3>Your task today</h3>
            </div>
            <div className='right'>
-              <button onClick={HandleCreate}>+ Create a book</button>
+              <button onClick={handleToggleModal}>+ Create a book</button>
            </div>
        </Top>
       </Container>       
     </Bar>
-  )
+  );
 }
+
 const Container = styled.div`
   margin:0 auto;
   padding: 0 20px;
@@ -281,11 +328,7 @@ const Done = styled.div`
   }
     
 `
-
-export default Header
-
-
-
+export default Header;
 
 
 
