@@ -7,7 +7,6 @@ import { Route, Routes } from 'react-router-dom';
 import { AuthContextProvider } from './contexts/AuthContext.jsx';
 import ProtectedRoute from './views/auth/protected';
 import Views from './views';
-
 function App() {
   return (
     <Divv>

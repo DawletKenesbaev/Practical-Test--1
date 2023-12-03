@@ -12,7 +12,7 @@ function SignUp() {
   const [error, setError] = useState('')
   const navigate = useNavigate();
   
-  const { createUser } = UserAuth();
+  const { createUser, signInWithGoogle } = UserAuth();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
@@ -31,7 +31,7 @@ function SignUp() {
     <OuterBox>
        <Divv>
          <h1 className='Divv-title'>Sign Up</h1>
-         <button className='Divv-con'>
+         <button className='Divv-con' onClick={signInWithGoogle} >
             <img className='Divv-img' src={Googleicon} alt='google'/>
             <h2>Continue with Google</h2>
         </button>

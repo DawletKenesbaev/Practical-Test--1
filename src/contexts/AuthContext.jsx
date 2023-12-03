@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -23,7 +24,14 @@ export const AuthContextProvider = ({ children }) => {
   const logout = () => {
       return signOut(auth)
   }
-
+  const signInWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -34,7 +42,7 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ createUser, user, logout, signIn }}>
+    <UserContext.Provider value={{ createUser, user, logout, signIn,signInWithGoogle}}>
       {children}
     </UserContext.Provider>
   );

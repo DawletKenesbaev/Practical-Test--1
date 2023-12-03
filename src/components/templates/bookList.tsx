@@ -26,8 +26,8 @@ function BookCard({ book }: BookCardProps) {
     return (
       <Col  sm={24} md={12} lg={8} xl={8} >
             <Card>
-              <h2>{book.title.split(/\s+/).slice(0, 15).join(' ') }</h2>
-              <p>{book.summary ? book.summary.split(/\s+/).slice(0, 50).join(' ') :" Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate natus laboriosam, eveniet,    Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate natus laboriosam, eveniet, accusantium quod vitae voluptate cum corrupti beatae deleniti quam nobis nisi!"}</p>
+              <h2>{book.title.split(/\s+/).slice(0, 10).join(' ') }</h2>
+              <p>{book.summary ? book.summary.split(/\s+/).slice(0, 40).join(' ') :" Lorem ipsum Lorem ipsectetur adipisicing elit. Cupiditate natus laboriosam, eveniet, accusantium quod vitae voluptate cum corrupti beatae deleniti quam nobis nisi!"}</p>
               <img src={book.cover}  alt='book.title'/>
               <h3>{book.author}   {book.published}</h3>
               {book.pages ? <span>{book.pages} pages</span> : <h3></h3>}
@@ -103,16 +103,20 @@ function BookCard({ book }: BookCardProps) {
       const handlePageChange = (page: number) => {
         setCurrentPage(page);
       };
-
+    const data = searchTerm?filteredBooks:books;
     const renderBooks = () => {
       const startIndex = (currentPage - 1) * BOOKS_PER_PAGE;
       const endIndex = startIndex + BOOKS_PER_PAGE;
-      const data = searchTerm?filteredBooks:books;
       return data.slice(startIndex, endIndex).map((book, index) => <BookCard key={index} book={book} />);
     };
     return (
       <div>
-      <Row>{totalBooks > 0 ? renderBooks() : <p>Loading</p>}</Row>
+      <Row>{totalBooks > 0 ? renderBooks() :
+        <LoaderContainer>
+          <div className="loader"></div>
+            <p>Wait some minute .Server working slow. Loading...</p>
+        </LoaderContainer>
+      }</Row>
       {totalBooks > BOOKS_PER_PAGE && (
         <PaginationContainer>
           <Pagination current={currentPage} total={totalBooks} pageSize={BOOKS_PER_PAGE} onChange={handlePageChange} />
@@ -156,6 +160,7 @@ const Card = styled.div`
         font-size: 15px;
         font-weight: 400;
         line-height: 21px;
+        margin-top:15px;
     }
     span {
         display: inline-block;
@@ -172,6 +177,29 @@ const Card = styled.div`
       display:block;
       box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
     }
+`
+const LoaderContainer = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+ 
+}
+p {
+  font-size: 16px;
+  color: white;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 `
 const PaginationContainer = styled.div`
   text-align: center;

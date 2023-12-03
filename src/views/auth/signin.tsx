@@ -12,7 +12,8 @@ const SignIn: React.FC = ()=> {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const { signIn } = UserAuth();
+  const { signIn, signInWithGoogle } = UserAuth();
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('')
@@ -33,7 +34,7 @@ const SignIn: React.FC = ()=> {
        <Divv>
          <h1 className='Divv-title'>Sign In</h1>
          <button className='Divv-con'>
-            <img className='Divv-img' src={Googleicon} alt='google'/>
+            <img className='Divv-img' onClick={signInWithGoogle} src={Googleicon} alt='google'/>
             <h2>Continue with Google</h2>
         </button>
          <button className='Divv-con'>

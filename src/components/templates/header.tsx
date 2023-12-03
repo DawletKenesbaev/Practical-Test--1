@@ -62,16 +62,17 @@ function Header(props: HeaderProps) {
     handleShow();
     props.setFetch(!props.fetch);
     const requestData = {
-      isbn: "9781118464490",
-      ...formData, 
+      isbn: "9781118464465",
     };
     try {
       const method = 'POST';
-      const apiUrl = "https://0001.uz/books";
+      const apiUrl = "/books";
       const userSecret = 'Catt';
       const requestBody = { "isbn": "9781118464465" };
-      const sign = CryptoJS.MD5(`${method}${apiUrl}${userSecret}`).toString();
+      const sign = CryptoJS.MD5(`${method}${apiUrl}${requestBody}${userSecret}`).toString();
       console.log(sign);
+      console.log('f7d7273905545235092e03f801833fc3');
+      
       const response = await fetch("https://0001.uz/books", {
         method: "POST",
         headers: {
@@ -107,7 +108,7 @@ function Header(props: HeaderProps) {
         <Input onChange={handleChange} value={formData.author}  placeholder='Enter your author' type="text" id="author" name="author" />
         <Label htmlFor="cover"> Summary</Label>
         <Input onChange={handleChange} value={formData.cover}  placeholder='Enter your cover' type="text" id="cover" name="cover" />
-        <Label htmlFor="date">Published year    </Label>
+        <Label htmlFor="date">Published year </Label>
         <Input onChange={handleChange} value={formData.published}  placeholder='Enter your published date' type="text" id="date" name="date" />
         <Label htmlFor="pages"> Pages</Label>
         <Input onChange={handleChange} value={formData.pages}  placeholder='Enter your pages' type="text" id="pages" name="pages" />
