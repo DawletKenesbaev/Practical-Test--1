@@ -72,7 +72,6 @@ function BookCard({ book }: BookCardProps) {
           const apiUrl = `/books/${searchTerm}`;
           const userSecret = 'Catt';
           const sign = CryptoJS.MD5(`${method.toUpperCase()}${apiUrl}${userSecret}`).toString();
-          console.log(sign);
           const url = `${URL}/books/${searchTerm}`;
           try { 
             const response = await fetch(url, {
