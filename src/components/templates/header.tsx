@@ -61,19 +61,25 @@ function Header(props: HeaderProps) {
     e.preventDefault();
     handleShow();
     props.setFetch(!props.fetch);
-    const requestData = {
-      isbn: "9781118464465",
-    };
+    const requestData ={
+      "data": {
+          "author": "Eben Upton",
+          "cover": "https://covers.openlibrary.org/b/id/7605922-M.jpg",
+          "id": 1,
+          "isbn": "9781118464465",
+          "pages": 0,
+          "published": 2012,
+          "title": "Raspberry Pi User Guide"
+      },
+      "isOk": true,
+      "message": "ok"
+  }
     try {
       const method = 'POST';
       const apiUrl = "/books";
       const userSecret = 'Catt';
       const requestBody = { "isbn": "9781118464465" };
       const sign = CryptoJS.MD5(`${method}${apiUrl}${requestBody}${userSecret}`).toString();
-      console.log(sign);
-      console.log('f7d7273905545235092e03f801833fc3');
-
-
       const response = await fetch("https://0001.uz/books", {
         method: "POST",
         headers: {

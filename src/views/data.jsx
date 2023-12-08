@@ -29,7 +29,7 @@ function Sign(params) {
             getPath: () => '/books',
             getPathWithQuery: () => '/books',
         },
-        body: '{"isbn":"9781118464462"}',
+        body: '{"isbn":"9781118464465"}',
     };
     
     // Mocking collection variables
@@ -53,12 +53,31 @@ function Sign(params) {
         const sign = CryptoJS.MD5(signstr).toString();
         console.log("signstr:", signstr);
         console.log("sign:", sign);
+        const requestData =
+             {
+               isbn: "9781118464462",
+             };
+        console.log(JSON.stringify(requestData));
+
         const handleCreateBook = async () => {
-            const requestData = {
-              isbn: "9781118464462",
-            };
+            const requestData =
+             {
+               isbn: "9781118464462",
+             };
+           let exampledata = {
+              "data": {
+                  "author": "Eben Upton",
+                  "cover": "https://covers.openlibrary.org/b/id/7605922-M.jpg",
+                  "id": 1,
+                  "isbn": "9781118464465",
+                  "pages": 0,
+                  "published": 2012,
+                  "title": "Raspberry Pi User Guide"
+              },
+              "isOk": true,
+              "message": "ok"
+          }
             try {
-        
               const response = await fetch("https://0001.uz/books", {
                 method: "POST",
                 headers: {
